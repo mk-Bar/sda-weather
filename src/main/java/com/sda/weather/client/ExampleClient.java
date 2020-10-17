@@ -5,7 +5,8 @@ import com.sda.weather.application.LocalizationController;
 import java.util.Scanner;
 
 public class ExampleClient {
-private final LocalizationController controller=new LocalizationController();
+    private final LocalizationController controller = new LocalizationController();
+
     public void runClientInterface() {
         System.out.println("Twoja aplikacja została uruchomiona");
         Scanner scanner = new Scanner(System.in);
@@ -42,6 +43,17 @@ private final LocalizationController controller=new LocalizationController();
     }
 
     private void addLocalization() {
-        controller.addLocalization("");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Podaj nazwe państwa: ");
+        String countryName = scanner.nextLine();
+        System.out.print("Podaj region: ");
+        String region = scanner.nextLine();
+        System.out.print("Podaj nazwe miasta: ");
+        String citiName = scanner.nextLine();
+        System.out.println("Podaj długosc geograficzną");
+        int longitude = scanner.nextInt();
+        System.out.println("Podaj szerokość geograficzną");
+        int latitude = scanner.nextInt();
+        String response = LocalizationController.addLocalization(citiName, region, countryName, latitude, longitude);
     }
 }

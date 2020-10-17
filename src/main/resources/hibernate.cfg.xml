@@ -1,0 +1,15 @@
+<hibernate-configuration>
+    <session-factory>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/jdbc_weather?serverTimezone=Europe/Warsaw</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Kajtons0420.!</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!--      name="hbm2ddl.auto"  musi byc none bo hibernate moze bez naszej wiedzy zmienic strukture tabeli a anawet ja usunąc -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">false</property>
+        <property name="use.sql_comments">true</property>
+        <mapping class="com.example.entity.LocalizationEntry"/>
+    </session-factory>
+</hibernate-configuration>
