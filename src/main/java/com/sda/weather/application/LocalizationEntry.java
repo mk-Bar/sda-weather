@@ -1,23 +1,35 @@
 package com.sda.weather.application;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
 
 @Entity
 @Data
-@Table(name = "localizationTable")
+@NoArgsConstructor
+//@Table(name = "localizationTable")
 public class LocalizationEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Column(nullable = false)
+    //    @Column(nullable = false)
     String citiName;
     String region;
-    @Column(nullable = false)
+    //    @Column(nullable = false)
     String countryName;
-    Instant createdDate;
     int latitude;
     int longitude;
+//    Instant createdDate;
+
+
+    public LocalizationEntry(final String citiName, final String region, final String countryName, final int latitude, final int longitude) {
+        this.citiName = citiName;
+        this.region = region;
+        this.countryName = countryName;
+//        this.createdDate = createdDate;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
