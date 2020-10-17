@@ -1,11 +1,11 @@
 package com.sda.weather.client;
 
-import com.sda.weather.application.Controller;
+import com.sda.weather.application.LocalizationController;
 
 import java.util.Scanner;
 
 public class ExampleClient {
-private final Controller controller=new Controller();
+private final LocalizationController controller=new LocalizationController();
     public void runClientInterface() {
         System.out.println("Twoja aplikacja została uruchomiona");
         Scanner scanner = new Scanner(System.in);
