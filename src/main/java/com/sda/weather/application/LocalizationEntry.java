@@ -4,20 +4,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
+
 
 @Entity
 @Data
 @NoArgsConstructor
-//@Table(name = "localizationTable")
+@Table(name = "localizationTable")
 public class LocalizationEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    //    @Column(nullable = false)
+    @Column(nullable = false)
     String citiName;
     String region;
-    //    @Column(nullable = false)
+    @Column(nullable = false)
     String countryName;
     int latitude;
     int longitude;

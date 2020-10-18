@@ -55,6 +55,7 @@ public class ExampleClient {
         System.out.println("Podaj szerokość geograficzną");
         int latitude = scanner.nextInt();
         String response = localizationController.addLocalization(citiName, region, countryName, latitude, longitude);
-        System.out.println("Lokalizacja została zapisana: " + response);
+        if (response)
+            System.out.println("Lokalizacja została zapisana: " + response);
     }
 }
