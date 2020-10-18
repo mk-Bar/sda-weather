@@ -1,5 +1,6 @@
 package com.sda.weather.client;
 
+import com.sda.weather.customExceptions.BadReguestException;
 import com.sda.weather.application.LocalizationController;
 
 import java.util.Scanner;
@@ -40,6 +41,8 @@ public class ExampleClient {
     }
 
     private void showAddedPlaces() {
+        String showPlaces = localizationController.showAddedPlaces();
+        System.out.println("Zapisane lokalizacje: " + showPlaces);
     }
 
     private void addLocalization() {
@@ -57,7 +60,7 @@ public class ExampleClient {
         try {
             String response = localizationController.addLocalization(citiName, region, countryName, latitude, longitude);
             System.out.println("Lokalizacja została zapisana: " + response);
-        } catch (RuntimeException e) { // todo: change to our exception
+        } catch (BadReguestException e) { // todo: change to our exception
             System.out.println("Lokalizacja nie została dodana: " + e.getMessage());
         }
     }

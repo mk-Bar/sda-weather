@@ -29,6 +29,12 @@ class LocalizationServiceTest {
     }
 
     @Test
+    void addEmptycountryLocalization() {
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization("city ", "region", "  ", 0, 0));
+    }
+
+    @Test
     void addNewLocalizationWhenLongitudeIsAbove180_shouldThrowException() {
         // when
         assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", 0, 181));
@@ -38,5 +44,23 @@ class LocalizationServiceTest {
     void addNewLocalizationWhenLongitudeIsBelow180_shouldThrowException() {
         // when
         assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", 0, -181));
+    }
+
+    @Test
+    void addNewLocalizationWhenLatitudeIsAbove90_shouldThrowException() {
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", 91, 18));
+    }
+
+    @Test
+    void addNewLocalizationWhenLatitudeIsBelow90_shouldThrowException() {
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", -91, -18));
+    }
+
+    @Test
+    void readAllSavedPlacesTest() {
+
+        assertNotNull(localizationService.readAllSavedPlaces());
     }
 }
