@@ -38,10 +38,18 @@ public class ExampleClient {
     }
 
     private void getWeatherParameters() {
+        // todo: provide the implementation
+        // todo: use WeatherController.java
     }
 
     private void showAddedPlaces() {
         String showPlaces = localizationController.showAddedPlaces();
+
+        showPlaces = showPlaces.replaceAll("\\[", "\n")
+                .replaceAll("\\{", "\n")
+                .replaceAll("\\}", "")
+                .replaceAll("\\]", "");
+
         System.out.println("Zapisane lokalizacje: " + showPlaces);
     }
 
@@ -60,7 +68,7 @@ public class ExampleClient {
         try {
             String response = localizationController.addLocalization(citiName, region, countryName, latitude, longitude);
             System.out.println("Lokalizacja została zapisana: " + response);
-        } catch (BadReguestException e) { // todo: change to our exception
+        } catch (BadReguestException e) {
             System.out.println("Lokalizacja nie została dodana: " + e.getMessage());
         }
     }
