@@ -10,10 +10,10 @@ class LocalizationServiceTest {
 
     @Test
     void addNewLocalization_returnAdded() {
-
-        //when
+        // when
         LocalizationEntry addedLocalization = localizationService.addNewLocalization("city", "region", "country", 0, 0);
-        //then
+
+        // then
         assertNotNull(addedLocalization);
         assertEquals(addedLocalization.getCitiName(), "city");
         assertEquals(addedLocalization.getRegion(), "region");
@@ -24,9 +24,19 @@ class LocalizationServiceTest {
 
     @Test
     void addEmptyCityLocalization() {
-        LocalizationEntry addedLocalization = localizationService.addNewLocalization("", "region", "country", 0, 0);
-        //then
-        assertThrows(Exception.class, () -> localizationService.addNewLocalization("", "region", "country", 0, 0));
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization(" ", "region", "country", 0, 0));
     }
 
+    @Test
+    void addNewLocalizationWhenLongitudeIsAbove180_shouldThrowException() {
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", 0, 181));
+    }
+
+    @Test
+    void addNewLocalizationWhenLongitudeIsBelow180_shouldThrowException() {
+        // when
+        assertThrows(Exception.class, () -> localizationService.addNewLocalization("city", "region", "country", 0, -181));
+    }
 }

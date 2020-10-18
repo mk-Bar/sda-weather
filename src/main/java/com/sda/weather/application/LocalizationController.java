@@ -14,7 +14,7 @@ public class LocalizationController {
         try {
             return objectMapper.writeValueAsString(localizationEntry);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Obiekt localizationEntry nie może zostać zserializowany");
+            throw new RuntimeException("Obiekt localizationEntry nie może zostać zserializowany"); // todo: change to InternalServerException -> 500
         }
     }
 }
