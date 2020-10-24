@@ -1,19 +1,18 @@
 package com.sda.weather.application.weather;
 
-import com.sda.weather.application.localization.LocalizationEntry;
-import com.sda.weather.application.localization.LocalizationRepository;
-
 import java.util.List;
 
 public class WeatherService {
     private final WeatherRepository weatherRepository = new WeatherRepository();
 
-    public WeatherEntry addNewWeather(final String citiname, final String dt_txt, final String windSpeed) {
+    public WeatherEntry addNewWeather(final String cityName) {
 
-        WeatherEntry weatherEntry = new WeatherEntry(citiname, dt_txt, windSpeed);
-        WeatherEntry savedWaether = weatherRepository.saveNewEntry(weatherEntry);
+        // todo use WeatherForecastClient, pass cityName, retrieve WeatherResponse
+        // todo map (translate) WeatherResponse to WeatherEntry
+        // todo save new WeatherEntry to database by using WeatherRepository
+        // todo return WeatherEntry
 
-        return savedWaether;
+        return null;
     }
 
     public List<WeatherEntry> readSavedWeather() {

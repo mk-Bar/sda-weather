@@ -47,7 +47,8 @@ public class ExampleClient {
 
     private void getWeatherParameters() {
         System.out.println("okresl lokalizację dla jakiej chcesz sprawdzic prognoze pogody:");
-        weatherController.CheckWeather();
+        String response = weatherController.checkWeather("London");
+        System.out.println("Twoja pogoda: " + response);
         // todo: provide the implementation
         // todo: use WeatherController.java
     }

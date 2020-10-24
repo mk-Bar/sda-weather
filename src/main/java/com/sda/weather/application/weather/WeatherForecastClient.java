@@ -21,7 +21,7 @@ public class WeatherForecastClient {
         objectMapper.findAndRegisterModules();
     }
 
-    public String getWeather(String cityName) {
+    public WeatherResponse.ListItem getWeather(String cityName) {
         String uri = String.format("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s", cityName, API_KEY);
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
@@ -32,15 +32,14 @@ public class WeatherForecastClient {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             String responseBody = httpResponse.body();
 
-
             WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);
-            List<WeatherResponse.ListItem> weatherDate = weatherResponse.getList();
 
+            WeatherResponse.ListItem listItem = weatherResponse.getList().stream()
+//                    .filter( listItem -> )    // todo filter to obtain a forecast for next day
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("...")); // todo create your own exception;
 
-            return objectMapper.writeValueAsString(weatherDate);
-            // todo: map to WeatherResponse -> objectMapper.readValue()
-
-//            return objectMapper.writeValueAsString(weatherDate);
+            return listItem;
         } catch (Exception e) {
             System.out.println("Nieudana próba polączenia: " + e.getMessage());
             throw new BadGatewayException("BadGatewayException -> 502");

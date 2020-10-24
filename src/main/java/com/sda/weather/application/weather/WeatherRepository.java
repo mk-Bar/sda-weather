@@ -31,7 +31,8 @@ public class WeatherRepository {
     public List<WeatherEntry> readSavedWeather() {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        List savedWeather = session.createQuery("FROM WeatherEntry").getResultList();
+
+        List<WeatherEntry> savedWeather = session.createQuery("FROM WeatherEntry").getResultList();
 
         transaction.commit();
         session.close();

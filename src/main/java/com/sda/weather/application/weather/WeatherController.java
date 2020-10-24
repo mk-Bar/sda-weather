@@ -12,9 +12,8 @@ public class WeatherController {
     private final WeatherService weatherService = new WeatherService();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public String CheckWeather(String citiname) {
-        if ()
-            WeatherEntry weatherEntry = weatherService.addNewWeather(citiname);
+    public String checkWeather(String cityName) {
+        WeatherEntry weatherEntry = weatherService.addNewWeather(cityName);
 
         try {
             return objectMapper.writeValueAsString(weatherEntry);

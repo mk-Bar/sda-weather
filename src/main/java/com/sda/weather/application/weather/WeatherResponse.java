@@ -9,21 +9,17 @@ import java.util.List;
 public class WeatherResponse {
 
     List<ListItem> list = new ArrayList<>();
-    List<Wind> wind = new ArrayList<>();
 
     @Data
     public static class ListItem {
-
         String dt_txt;
-        //                String speed="test";
-//        String windSpeed=getWindSpeed();
         String dt;
-    }
+        Wind wind;
 
-    @Data
-    public static class Wind {
-
-        String speed;
-        String deg;
+        @Data
+        public static class Wind {
+            String speed;
+            String deg;
+        }
     }
 }
