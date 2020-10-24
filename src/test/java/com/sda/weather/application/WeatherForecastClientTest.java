@@ -1,5 +1,6 @@
 package com.sda.weather.application;
 
+import com.sda.weather.application.weather.WeatherForecastClient;
 import org.junit.jupiter.api.Test;
 
 class WeatherForecastClientTest {

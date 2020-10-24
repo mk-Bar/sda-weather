@@ -1,8 +1,7 @@
-package com.sda.weather.application;
+package com.sda.weather.application.localization;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sda.weather.customExceptions.BadReguestException;
 import com.sda.weather.customExceptions.InternalServerException;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public class LocalizationController {
         try {
             return objectMapper.writeValueAsString(localizationEntry);
         } catch (JsonProcessingException e) {
-            throw new InternalServerException("InternalServerException -> 500: Obiekt localizationEntry nie może zostać zserializowany"); // todo: change to InternalServerException -> 500
+            throw new InternalServerException("InternalServerException -> 500: Obiekt localizationEntry nie może zostać zserializowany");
         }
     }
 

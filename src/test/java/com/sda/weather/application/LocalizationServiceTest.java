@@ -1,5 +1,7 @@
 package com.sda.weather.application;
 
+import com.sda.weather.application.localization.LocalizationEntry;
+import com.sda.weather.application.localization.LocalizationService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,12 +1,14 @@
-package com.sda.weather.application;
+package com.sda.weather.application.weather;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sda.weather.customExceptions.BadGatewayException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
 
 public class WeatherForecastClient {
 
@@ -15,7 +17,7 @@ public class WeatherForecastClient {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public WeatherForecastClient() {
-        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);  // co to jest?
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);  // co to jest?  jesli nie odwzowrujemy 1:1 to bezeie wyjątek. argument false pozwala to ominmąc
         objectMapper.findAndRegisterModules();
     }
 
@@ -28,14 +30,20 @@ public class WeatherForecastClient {
 
         try {
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            String weatherResponse = httpResponse.body();
+            String responseBody = httpResponse.body();
 
+
+            WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);
+            List<WeatherResponse.ListItem> weatherDate = weatherResponse.getList();
+
+
+            return objectMapper.writeValueAsString(weatherDate);
             // todo: map to WeatherResponse -> objectMapper.readValue()
 
-            return weatherResponse;
+//            return objectMapper.writeValueAsString(weatherDate);
         } catch (Exception e) {
             System.out.println("Nieudana próba polączenia: " + e.getMessage());
-            throw new RuntimeException("..."); // todo: create new exception eg. BadGatewayException -> 502
+            throw new BadGatewayException("BadGatewayException -> 502");
         }
     }
 }

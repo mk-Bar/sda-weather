@@ -1,43 +1,53 @@
 package com.sda.weather.client;
 
-import com.sda.weather.customExceptions.BadReguestException;
-import com.sda.weather.application.LocalizationController;
+import com.sda.weather.application.weather.WeatherController;
+import com.sda.weather.customExceptions.BadRequestException;
+import com.sda.weather.application.localization.LocalizationController;
 
 import java.util.Scanner;
 
 public class ExampleClient {
     private final LocalizationController localizationController = new LocalizationController();
+    private final WeatherController weatherController = new WeatherController();
 
     public void runClientInterface() {
         System.out.println("Twoja aplikacja została uruchomiona");
         Scanner scanner = new Scanner(System.in);
-
+        int response = 0;
         while (true) {
             System.out.println("Menu aplikacji Weather. Określ co chcesz zrobić: ");
             System.out.println("1. Dodaj lokalizację do bazy danych");
             System.out.println("2. Wyświetl aktualnie dodane lokalizacje");
             System.out.println("3. Pobierz wartości pogodowe");
-            System.out.println("0. Zamknij aplikację");
+            System.out.println("4. Zamknij aplikację");
 
-            int response = scanner.nextInt();
+            try {
+                response = scanner.nextInt();
+                switch (response) {
+                    case 1:
+                        addLocalization();
+                        break;
+                    case 2:
+                        showAddedPlaces();
+                        break;
+                    case 3:
+                        getWeatherParameters();
+                        break;
+                    case 4:
+                        System.out.println("Twoja aplikacja jest zamykana");
+                        return;
+                }
+            } catch (Exception e) {
+                System.out.println("Wybierz wartość liczbową odpowiadającą danej funkcjonalności" + "\n");
+                scanner.nextLine();
 
-            switch (response) {
-                case 1:
-                    addLocalization();
-                    break;
-                case 2:
-                    showAddedPlaces();
-                    break;
-                case 3:
-                    getWeatherParameters();
-                case 0:
-                    System.out.println("Twoja aplikacja jest zamykana");
-                    return;
             }
         }
     }
 
     private void getWeatherParameters() {
+        System.out.println("okresl lokalizację dla jakiej chcesz sprawdzic prognoze pogody:");
+        weatherController.CheckWeather();
         // todo: provide the implementation
         // todo: use WeatherController.java
     }
@@ -68,7 +78,7 @@ public class ExampleClient {
         try {
             String response = localizationController.addLocalization(citiName, region, countryName, latitude, longitude);
             System.out.println("Lokalizacja została zapisana: " + response);
-        } catch (BadReguestException e) {
+        } catch (BadRequestException e) {
             System.out.println("Lokalizacja nie została dodana: " + e.getMessage());
         }
     }
