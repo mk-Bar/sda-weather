@@ -1,4 +1,4 @@
-package com.sda.weather.application;
+package com.sda.weather.application.weather;
 
 import com.sda.weather.application.weather.WeatherForecastClient;
 import com.sda.weather.application.weather.WeatherResponse;
@@ -10,7 +10,7 @@ class WeatherForecastClientTest {
 
     @Test
     void test() {
-        WeatherResponse.ListItem result = weatherForecastClient.getWeather("London");
+        WeatherResponse.ListItem result = weatherForecastClient.getWeather("London", "2020-10-26 12:00:00");
         System.out.println(result);
     }
 }

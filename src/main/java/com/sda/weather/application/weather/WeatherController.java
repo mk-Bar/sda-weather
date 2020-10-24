@@ -2,18 +2,14 @@ package com.sda.weather.application.weather;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sda.weather.application.localization.LocalizationEntry;
-import com.sda.weather.application.localization.LocalizationService;
 import com.sda.weather.customExceptions.InternalServerException;
-
-import java.util.List;
 
 public class WeatherController {
     private final WeatherService weatherService = new WeatherService();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public String checkWeather(String cityName) {
-        WeatherEntry weatherEntry = weatherService.addNewWeather(cityName);
+    public String checkWeather(String cityName, String data) {
+        WeatherEntry weatherEntry = weatherService.getNewWeather(cityName, data);
 
         try {
             return objectMapper.writeValueAsString(weatherEntry);

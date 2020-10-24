@@ -46,8 +46,11 @@ public class ExampleClient {
     }
 
     private void getWeatherParameters() {
-        System.out.println("okresl lokalizację dla jakiej chcesz sprawdzic prognoze pogody:");
-        String response = weatherController.checkWeather("London");
+        System.out.println("okresl lokalizację (miasto) dla jakiej chcesz sprawdzic prognoze pogody:");
+        Scanner scanner = new Scanner(System.in);
+        String cityName = scanner.nextLine();
+        String data = scanner.nextLine();
+        String response = weatherController.checkWeather(cityName, data);
         System.out.println("Twoja pogoda: " + response);
         // todo: provide the implementation
         // todo: use WeatherController.java
@@ -64,7 +67,8 @@ public class ExampleClient {
         System.out.println("Zapisane lokalizacje: " + showPlaces);
     }
 
-    private void addLocalization() {
+    //sprawdzic czy zmiana na public nie powoduje zamieszania w kodzie
+    public void addLocalization() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Podaj nazwe państwa: ");
         String countryName = scanner.nextLine();

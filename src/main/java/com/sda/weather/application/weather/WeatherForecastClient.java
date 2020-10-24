@@ -3,12 +3,17 @@ package com.sda.weather.application.weather;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sda.weather.customExceptions.BadGatewayException;
+import com.sda.weather.customExceptions.BadWeatherDataException;
 
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.security.cert.CollectionCertStoreParameters;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class WeatherForecastClient {
 
@@ -21,7 +26,7 @@ public class WeatherForecastClient {
         objectMapper.findAndRegisterModules();
     }
 
-    public WeatherResponse.ListItem getWeather(String cityName) {
+    public WeatherResponse.ListItem getWeather(String cityName, String data) {
         String uri = String.format("http://api.openweathermap.org/data/2.5/forecast?q=%s&appid=%s", cityName, API_KEY);
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .GET()
@@ -35,9 +40,12 @@ public class WeatherForecastClient {
             WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);
 
             WeatherResponse.ListItem listItem = weatherResponse.getList().stream()
-//                    .filter( listItem -> )    // todo filter to obtain a forecast for next day
+
+//                    .filter(li -> li.dt_txt.equals("2020-10-25 12:00:00"))
+                    .filter(li -> li.dt_txt.equals(data))
+
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("...")); // todo create your own exception;
+                    .orElseThrow(() -> new BadWeatherDataException("Podane zostały złe dane wejściowe- prognoza nie obsluguje takiej daty"));
 
             return listItem;
         } catch (Exception e) {

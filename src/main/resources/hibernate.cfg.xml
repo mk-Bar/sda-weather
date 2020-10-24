@@ -11,5 +11,6 @@
         <property name="format_sql">false</property>
         <property name="use.sql_comments">true</property>
         <mapping class="com.sda.weather.application.localization.LocalizationEntry"/>
+        <mapping class="com.sda.weather.application.weather.WeatherEntry"/>
     </session-factory>
 </hibernate-configuration>

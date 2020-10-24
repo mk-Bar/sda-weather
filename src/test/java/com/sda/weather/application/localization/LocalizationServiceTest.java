@@ -1,4 +1,4 @@
-package com.sda.weather.application;
+package com.sda.weather.application.localization;
 
 import com.sda.weather.application.localization.LocalizationEntry;
 import com.sda.weather.application.localization.LocalizationService;

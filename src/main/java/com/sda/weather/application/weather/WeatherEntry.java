@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -18,10 +19,11 @@ public class WeatherEntry {
     Long id;
     @Column(nullable = false)
     String cityName;
-    LocalDate localDate;
+    //    LocalDateTime localDate;
+    String localDate;
     String windSpeed;
 
-    public WeatherEntry(String cityName, LocalDate localDate, String windSpeed) {
+    public WeatherEntry(String cityName, String localDate, String windSpeed) {
         this.cityName = cityName;
         this.localDate = localDate;
         this.windSpeed = windSpeed;
