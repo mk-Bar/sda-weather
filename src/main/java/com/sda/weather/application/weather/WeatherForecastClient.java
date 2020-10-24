@@ -40,10 +40,8 @@ public class WeatherForecastClient {
             WeatherResponse weatherResponse = objectMapper.readValue(responseBody, WeatherResponse.class);
 
             WeatherResponse.ListItem listItem = weatherResponse.getList().stream()
-
 //                    .filter(li -> li.dt_txt.equals("2020-10-25 12:00:00"))
                     .filter(li -> li.dt_txt.equals(data))
-
                     .findFirst()
                     .orElseThrow(() -> new BadWeatherDataException("Podane zostały złe dane wejściowe- prognoza nie obsluguje takiej daty"));
 

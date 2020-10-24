@@ -50,8 +50,12 @@ public class ExampleClient {
         Scanner scanner = new Scanner(System.in);
         String cityName = scanner.nextLine();
         String data = scanner.nextLine();
-        String response = weatherController.checkWeather(cityName, data);
-        System.out.println("Twoja pogoda: " + response);
+        try {
+            String response = weatherController.checkWeather(cityName, data);
+            System.out.println("Twoja pogoda: " + response);
+        } catch (Exception e) {
+            System.out.println("Nie można pobrać informacji o pogdzie: " + e.getMessage());
+        }
         // todo: provide the implementation
         // todo: use WeatherController.java
     }

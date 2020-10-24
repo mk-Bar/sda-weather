@@ -9,7 +9,7 @@ class WeatherForecastClientTest {
     private final WeatherForecastClient weatherForecastClient = new WeatherForecastClient();
 
     @Test
-    void test() {
+    void test() { // todo change name, develop it
         WeatherResponse.ListItem result = weatherForecastClient.getWeather("London", "2020-10-26 12:00:00");
         System.out.println(result);
     }
